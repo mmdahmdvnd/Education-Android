@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
+    android:background="@drawable/back2">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
+        android:layout_marginRight="13dp"
+        android:text="با کلیک بر روی دکمه  - محتوی خانه شماره [0,2] از جدول بانک اطلاعاتی در تکست ویو نشان داده میشود ـ  بعنوان تمرین : با تغییر کدهای پروژه  خانه یا خانه های دیگر از جدول را نمایش دهید  - جدول زیر در بانک اطلاعاتی پروژه در پوشه assets موجود میباشد."
+        android:textColor="#ff0000" />
+
+     <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/db_img" />
+
+    <TextView
+        android:id="@+id/txt1_season2_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/btn1_season2_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        android:text="Button" />
+   
+</RelativeLayout>

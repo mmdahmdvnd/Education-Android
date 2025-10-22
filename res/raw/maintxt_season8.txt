@@ -1,0 +1,57 @@
+﻿import java.util.ArrayList;
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.app.Activity;
+import android.database.Cursor;
+
+public class MainActivity extends Activity
+{
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+	
+//اتصال لیست ویو به لایه ی(layout) خود :
+		ListView lv = (ListView)findViewById(R.id.my_sms);
+	
+//اگر در inbox sms پیامی موجود باشد:
+		if (fetch_inbox() != null)
+		{
+
+//تعریف یک لیست و آداپتر آن و نمایش اس ام اس های موجود در اینباکس که خروجی تابع ()fetch_inbox(که در زیر تعریف شده) هستند ، در این لیست :
+			ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+	android.R.layout.simple_list_item_1,fetch_inbox());
+			lv.setAdapter(adapter);
+		}
+	}
+
+
+//یک تابع با نام ()fetch_inbox و با خروجی از نوع آرای لیست با داده های از نوع استرینگ تعریف میکنیم . این تابع همه ی اس ام اس های موجود در اینباکس را در یک آرای لیست با نام sms قرار میدهد تا آنها را طبق بالا در یک لیست ویو قرار دهیم :
+	public ArrayList<String> fetch_inbox()
+	{
+		ArrayList<String> sms = new ArrayList<String>();
+	
+//تعریف یک Uri	با نام a که آدرس اینباکس اس ام اس را شامل میشود که البته اطلاعات این آدرس را نیز parse(تجزیه) شده دریافت میکند :
+		Uri a = Uri.parse("content://sms/inbox");
+	
+//	تعریف
+کارسور با نام b جهت کوئری گرفتن از دیتابیسی که در سیستم عامل اندروید جهت نگهداری اس ام اس ها بکار میرود (طبق import های ابتدای کلاس ، ارتباط این کارسور و دیتابیس مشهود است import android.database.Cursor) . در این کوئری که از a انجام میشود ، فیلدهایی از جدول موجود در دیتابیس ، با نامهای address , body در کارسور b قرار میگیرند(*** سایر فیلدها مثلا id و date و ... را طبق تصویری که در بین صفحات کدهای پروژه موجود است را میتوان اضافه کرد***) :
+		Cursor b = getContentResolver().query(a, new String[]{"address","body"}, null, null, null);
+	
+//به ابتدای b رفته و تا زمانیکه MoveToNext باشد(یعنی اس ام اس دیگری نیز موجود باشد) 	فیلدها را به آرای لیست sms اضافه میکنیم(عددهای 1و 3 در زیر ، همان شماره ی ترتیب فیلدها در تصویر نامبرده در بالا هستند) :
+		b.moveToFirst();
+		while(b.moveToNext())
+		{	
+			String address = b.getString(1);
+			String body    = b.getString(3);
+			sms.add("Address => " + address + "\nBody => " + body);
+	
+		}
+		
+		return sms;
+	}
+	
+}

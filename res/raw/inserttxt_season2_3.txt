@@ -1,0 +1,71 @@
+﻿import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class insert extends Activity{
+
+//تعریف ادیت تکست و دکمه های موجود در صفحه ی xml :
+	private EditText name;
+	private EditText family;
+	private EditText address;
+	private EditText email;
+	private EditText number;
+	
+	private Button insert;
+	private Button cancel;
+	
+	private dbHandler db;
+	
+	protected void onCreate(Bundle savedInstanceState) {
+		
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.insert);
+
+//
+شئ از کلاس dbHandler :
+//در اینجا this به این منظور آمده که چون شئ db از نوع کلاس dbHandler میباشد و سازنده ی این کلاس یک آرگومان از نوع context دارد پس وقتی در کلاس update فراخوانی میشود ، کلمه this یعنی context همین کلاس update را به آن میدهیم(کاربرد کانتکست این است که هر زمان بخواهیم که سیستم کاری برای ما انجام دهد مثلا دیتا را از دیتابیس بخواند و یا در کار با سرویسها و ... و در کل هر کاری که مربوط به سیستم شود ، باید کانتکست را بکار ببریم) :
+		db=new dbHandler(this);
+		
+	
+		name=(EditText) findViewById(R.id.insert_name);
+		family=(EditText) findViewById(R.id.insert_family);
+		address=(EditText) findViewById(R.id.insert_address);
+		email=(EditText) findViewById(R.id.insert_email);
+		number=(EditText) findViewById(R.id.insert_number);
+		
+		insert=(Button) findViewById(R.id.insert_insert);
+		cancel=(Button) findViewById(R.id.insert_cancel);
+		
+	//با فشردن کلید insert مقادیری که به عنوان اطلاعات کاربر در EditText ها  وارد شده ، بوسیله ی	متد ()insert از کلاس dbHandler(که شئ db را از آن ساخته ایم) ، در جدول ثبت میشوند :
+		insert.setOnClickListener(new OnClickListener(){
+
+		
+			public void onClick(View arg0) {
+				db.open();
+				db.insert(name.getText().toString(), family.getText().toString(), address.getText().toString(), email.getText().toString(), number.getText().toString());
+				db.close();
+			    Toast.makeText(getApplicationContext(), "مخاطب جدید با موفقیت اضافه شد",Toast.LENGTH_LONG).show();
+			    finish();
+		    
+			}
+		
+		});
+		
+	
+cancel.setOnClickListener(new OnClickListener()	
+}
+			public void onClick(View arg0) {
+				
+			    finish();
+	    
+			}
+		
+		});
+	
+		
+	}
+}

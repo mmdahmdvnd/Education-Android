@@ -1,0 +1,88 @@
+﻿
+در اندروید دو نوع دیتابیس میتوان تعریف و استفاده کرد . دیتابیس داخلی که در زمان اجرای برنامه ، خود برنامه آنرا در حافظه ی داخلی دستگاه ایجاد میکند و دیگری دیتابیس خارجی است که توسط برنامه نویس بوسیله نرم افزارهایی مثل SQLiteExpert و ... ساخته میشود و در برنامه(معمولا پوشه ی asset) قرار داده میشود .
+
+در این آموزش ایجاد دیتابیس داخلی شرح داده شده است . این دیتابیس هنگام نصب و اجرای برنامه ، در حافظه ی داخلی دستگاه و در پوشه های data و در پوشه ای همنام با پکیج پروژه ایجاد میشود (که در دستگاههای روت شده قابل رویت است) .
+
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
+
+
+public class Main extends Activity {
+	
+//تعریف یک متغیر از نوع کلاس dbHandler و چند دکمه :
+	private dbHandler db;
+	private Button insert;
+	private Button update;
+//آرایه ای از نوع String با نام name و یک لیست ویو :
+	public  String[] name;
+	private ListView list1;
+	
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+
+// برقراری اتصال دکمه ها و لیست ویو با layout خود :  
+        insert=(Button) findViewById(R.id.insert);
+        update=(Button) findViewById(R.id.update);
+                
+        list1=(ListView) findViewById(R.id.list);
+
+   //یک شئ از کلاس dbHandler میسازیم :
+//در اینجا this به این منظور آمده که چون در کلاس dbHandler ، سازنده ی کلاس یک context را بعنوان آرگومان دارد ، پس این this بجای همان کانتکست است که از همین کلاس Main آنرا میگیرد :
+        db=new dbHandler(this);
+   
+//فراخوانی تابع ()refresh که در زیر آمده :   
+        refresh();
+     
+        
+        insert.setOnClickListener(new OnClickListener(){
+			public void onClick(View arg0) {
+	
+//استفاده از همان توابعی که در کلاس dbHandler تعریف کردیم و db هم که یک شئ از همان کلاس است :	
+				db.open();
+				db.inser("android-mtr-design.ir", "best web site", "android programming");
+				Toast.makeText(getApplicationContext(), "Insert completed!", Toast.LENGTH_LONG).show();
+				db.close();
+				refresh();
+			}
+        });
+        
+        
+        
+        update.setOnClickListener(new OnClickListener(){
+			public void onClick(View arg0) {
+//استفاده از همان توابعی که در کلاس dbHandler تعریف کردیم و db هم که یک شئ از همان کلاس است :	
+				db.open();
+				db.update("Amuzesh-Amali-Android*******", 1, 5);//(شماره سطر ،شماره فیلد ، مقدار جدید)
+				Toast.makeText(getApplicationContext(), "Update completed!", Toast.LENGTH_LONG).show();
+				db.close();
+				refresh();
+			}
+        });
+ 
+    }
+    
+
+//تابع ()refresh به این منظور است که هر بار از دکمه های insert , delete , update استفاده شود ، تغییرات را در لیست ویو اعمال میکند :
+    public void refresh(){
+//استفاده از همان توابعی که در کلاس dbHandler تعریف کردیم و db هم که یک شئ از همان کلاس است :	
+        db.open();
+        int count=db.count();
+        name=new String[count];
+        for(int i=0;i<count;i++){
+        name[i]=db.Display(i,1)+"\n"+db.Display(i, 2);
+        }
+        db.close();
+        list1.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,name));
+        }
+ //تابع refresh به اینصورت عمل میکند که دیتابیس را باز میکند ، با ()count که در کلاس dbHandler تعریف شد ، اندازه ی دیتابیس را بدست می آورد ، در name که در بالای صفحه تعریف شد یک فضای جدید به آرایه از نوع String و به اندازه ی count میدهد ، با حلقه for به تعداد عناصر موجود در دیتابیس ، آرایه ی []name را پر میکند و عناصر را در لیست ویو قرار میدهد .
+    
+    
+}

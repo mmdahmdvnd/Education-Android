@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mmd.AmuzeshAmaliAndroid"
+    android:versionCode="1"
+    android:versionName="1.1.1" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        
+        
+                
+         <receiver
+            android:name=".mybroadcast1proj_season5"
+            android:enabled="true"
+            android:exported="true">
+         <intent-filter>
+             <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+         </intent-filter>
+        </receiver>    
+        <receiver
+            android:name=".Broadcast_smsproj_season5"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".Broadcast_wifiproj_season5"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        
+        
+        
+        <activity
+            android:name=".Splash"
+            android:label="@string/app_name" 
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".Menu"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Season1Menu"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Season2Menu"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Season3Menu"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Season4Menu"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Season5Menu"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Season6Menu"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Season7Menu"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Season8Menu"
+            android:screenOrientation="portrait"></activity>
+        
+        <activity android:name=".MainFrag_season1"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Main1proj_season1"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Main2proj_season1"
+            android:screenOrientation="portrait"></activity>
+        
+        <activity android:name=".MainFrag_season2_1"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season2_1"
+            android:screenOrientation="portrait"></activity> 
+        
+        <activity android:name=".MainFrag_season2_2"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season2_2"
+            android:screenOrientation="portrait"></activity>  
+        
+        <activity android:name=".Mainproj_season2_3"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".insertproj_season2_3"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".contactproj_season2_3"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".updateproj_season2_3"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".java_xml_season2_3"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".MainFrag_java_season2_3"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".MainFrag_xml_season2_3"
+            android:screenOrientation="portrait"></activity>
+        
+        <activity android:name=".MainFrag_season3_1"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season3_1"
+            android:screenOrientation="portrait"></activity>
+        
+        <activity android:name=".MainFrag_season3_2"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season3_2"
+            android:screenOrientation="portrait"></activity>
+        
+        <activity android:name=".MainFrag_season4_1"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".MainFrag_season4_2"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".MainFrag_season4_3_1"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".MainFrag_season4_3_2"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".MainFrag_season4_3_3"
+            android:screenOrientation="portrait"></activity>        
+        <activity android:name=".MainFrag_season4_4"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".MainFrag_season4_5"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".MainFrag_season4_6"
+            android:screenOrientation="portrait"></activity>
+        
+        <activity android:name=".Mainproj_season4_1"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season4_2"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season4_3_1"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season4_3_2"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season4_3_3"
+                  android:label="@string/app_name"
+                  android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season4_4"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season4_5"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season4_6"
+                  android:label="@string/app_name"
+                  android:screenOrientation="landscape"></activity>
+        
+        <activity android:name=".MainFrag_season5"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season5"
+            android:screenOrientation="portrait"></activity> 
+       
+        <activity android:name=".MainFrag_season6"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season6_"
+            android:screenOrientation="portrait"></activity>
+        
+        <activity android:name=".MainFrag_season7"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season7"
+            android:screenOrientation="portrait"></activity>
+        
+        <activity android:name=".MainFrag_season8"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Mainproj_season8"
+            android:screenOrientation="portrait"></activity>
+        
+        
+    </application>
+
+</manifest>

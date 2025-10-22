@@ -1,0 +1,119 @@
+﻿import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.sqlite.SQLiteOpenHelper;
+
+//
+یک کلاس با نام دلخواه(databse) تعریف و از SQLiteOpenHelper مشتق میکنیم :
+public class databse extends SQLiteOpenHelper {
+
+
+//مسیر(path) که در زمان اجرای برنامه ، دیتابیس در این مسیر از حافظه ی دستگاه کپی میشود تا از آن استفاده شود . عبارت data/data و همچنین نام پکیج برنامه الزامی است و databases نیز نام پوشه ایست که دیتابیس در آن کپی میشود :
+	public final String path="data/data/com.example.dbtest2/databases/";
+//نام دیتابیسی که بصورت خارجی ساخته شد dbtest میباشد که در متغیر Name قرار میگیرد و یک متغیر از نوع SQLiteDatabase با نام mydb :
+	public final String Name="dbtest";
+	public SQLiteDatabase mydb;
+//یک متغیر از نوع Context :
+	private final Context mycontext;
+
+//
+سازنده کلاس :
+//کاربرد context در اینجا به منظور دستیابی به منابع برنامه است که در پایین در متد ()copydatabase پوشه ی asset که جزء منابع برنامه است در دسترس قرار گرفته است .
+	public databse(Context context) {
+		super(context, "dbtest", null, 1);
+		mycontext=context;
+		
+	}
+
+	
+	
+	@Override
+	public void onCreate(SQLiteDatabase arg0) {
+		// TODO Auto-generated method stub
+	}
+
+
+//متد unimploiment مورد نیاز برای کلاس مشتق شده :
+	@Override
+	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+//این تابع وجود دیتابیس را چک میکند و در صورت وجود نداشتن در مسیر path ، آنرا با تابع ()copydatabase در مسیر path کپی میکند (متد ()checkdb در زیر تعریف شده است) :
+	public void database(){
+		boolean checkdb=checkdb();
+	
+		if(checkdb){
+	
+		}else{
+		
+			this.getReadableDatabase();
+		
+			try{
+			copydatabase();
+			}catch(IOException e){
+					
+			}
+		
+		}
+	
+	}
+	
+//متد جهت باز کردن دیتابیسی که در مسیر path وجود دارد (این متدها در کلاس Main مورد استفاده قرار میگیرند) :
+	public void open(){
+	
+		mydb=SQLiteDatabase.openDatabase(path+Name, null, SQLiteDatabase.OPEN_READWRITE);
+	
+	}
+	
+//بستن دیتابیس :
+	public void close(){
+		mydb.close();
+	}
+	
+	
+	public boolean checkdb(){
+	
+		SQLiteDatabase db=null;
+		try{	
+		db=SQLiteDatabase.openDatabase(path+Name, null, SQLiteDatabase.OPEN_READONLY);
+		}
+		catch(SQLException e)
+		{
+		}
+		return db !=null ? true:false ;
+	
+	}
+
+//با استفاده از اینپوت استریم و اوتپوت استریم و بوسیله ی یک ظرفی با نام دلخواه buffer , دیتابیس موجود در پوشه ی asset را در مسیر path و با نام Name ، در این مسیر کپی میکند :
+	public void copydatabase() throws IOException{
+		OutputStream myOutput = new FileOutputStream(path+Name);
+		byte[] buffer = new byte[1024];
+		int length;
+		InputStream myInput = mycontext.getAssets().open("dbtest");
+		while ((length = myInput.read(buffer)) > 0) {
+		myOutput.write(buffer, 0, length);
+		}
+		myInput.close();
+		myOutput.flush();
+		myOutput.close();
+	}
+	
+	
+//این متد مقدار field متناظر با row را بوسیله ی Cursor از جدول users موجود در دیتابیس کوئری میکند و در متغیر name قرار میدهد :
+	public String Display(int row,int fild){
+		Cursor cu= mydb.query("users", null, null, null, null, null, null);
+		cu.moveToPosition(row);
+		String name=cu.getString(fild);
+		return name;
+	}
+	
+}

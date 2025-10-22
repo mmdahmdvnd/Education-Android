@@ -1,0 +1,118 @@
+﻿import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+
+//در این کلاس چند دکمه قرار گرفته که در صورتی که نیازی به برودکست ریسیور نباشد و یا به هر دلیلی بخواهیم آنرا غیر فعال کنیم ، این عمل را انجام میدهند(اینجا تنها جنبه آموزشی دارند وگرنه مثلا میتوان آنرا در تنظیمات برنامه قرار داد) :
+public class Main extends ActionBarActivity {
+
+    private Button btn1,btn2,btn3,btn4,btn5,btn6;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+
+        btn1=(Button) findViewById(R.id.btn1);
+        btn2=(Button) findViewById(R.id.btn2);
+        btn3=(Button) findViewById(R.id.btn3);
+        btn4=(Button) findViewById(R.id.btn4);
+        btn5=(Button) findViewById(R.id.btn5);
+        btn6=(Button) findViewById(R.id.btn6);
+
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//تنظیم یک پکیج منیجر به منظور مدیریت اجزا یا همان  کامپوننتها(Component) :
+                PackageManager pm=getPackageManager();
+                ComponentName cn=new ComponentName(Main.this,Broadcast_usb.class);
+
+ //عبارت ENABLED به منظور فعال کردن کامپوننت و عبارت DONT_KILL_APP به منظور از بین نرفتن اکتیویتی و تنها انجام فعالیت روی کامپوننت : pm.setComponentEnabledSetting(cn,PackageManager.COMPONENT_ENABLED_STATE_ENABLED,PackageManager.DONT_KILL_APP);
+                Toast.makeText(getApplicationContext(), "ENABLED!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//تنظیم یک پکیج منیجر به منظور مدیریت اجزا یا همان  کامپوننتها(Component) :
+                PackageManager pm=getPackageManager();
+                ComponentName cn=new ComponentName(Main.this,Broadcast_usb.class);
+
+  //عبارت DISABLED به منظور فعال کردن کامپوننت و عبارت DONT_KILL_APP به منظور از بین نرفتن اکتیویتی و تنها انجام فعالیت روی کامپوننت :  pm.setComponentEnabledSetting(cn,PackageManager.COMPONENT_ENABLED_STATE_DISABLED,PackageManager.DONT_KILL_APP);
+                Toast.makeText(getApplicationContext(), "DISABLED!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//تنظیم یک پکیج منیجر به منظور مدیریت اجزا یا همان  کامپوننتها(Component) :
+                PackageManager pm=getPackageManager();
+                ComponentName cn=new ComponentName(Main.this,Broadcast_sms.class);
+ //عبارت ENABLED به منظور فعال کردن کامپوننت و عبارت DONT_KILL_APP به منظور از بین نرفتن اکتیویتی و تنها انجام فعالیت روی کامپوننت : pm.setComponentEnabledSetting(cn,PackageManager.COMPONENT_ENABLED_STATE_ENABLED,PackageManager.DONT_KILL_APP);
+                Toast.makeText(getApplicationContext(), "ENABLED!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//تنظیم یک پکیج منیجر به منظور مدیریت اجزا یا همان  کامپوننتها(Component) :
+                PackageManager pm=getPackageManager();
+                ComponentName cn=new ComponentName(Main.this,Broadcast_sms.class);
+ //عبارت DISABLED به منظور فعال کردن کامپوننت و عبارت DONT_KILL_APP به منظور از بین نرفتن اکتیویتی و تنها انجام فعالیت روی کامپوننت :  pm.setComponentEnabledSetting(cn,PackageManager.COMPONENT_ENABLED_STATE_DISABLED,PackageManager.DONT_KILL_APP);
+                Toast.makeText(getApplicationContext(), "DISABLED!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//تنظیم یک پکیج منیجر به منظور مدیریت اجزا یا همان  کامپوننتها(Component) :
+                PackageManager pm=getPackageManager();
+                ComponentName cn=new ComponentName(Main.this,Broadcast_wifi.class);
+  
+ //عبارت ENABLED به منظور فعال کردن کامپوننت و عبارت DONT_KILL_APP به منظور از بین نرفتن اکتیویتی و تنها انجام فعالیت روی کامپوننت : pm.setComponentEnabledSetting(cn,PackageManager.COMPONENT_ENABLED_STATE_ENABLED,PackageManager.DONT_KILL_APP);
+                Toast.makeText(getApplicationContext(), "ENABLED!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+        btn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//تنظیم یک پکیج منیجر به منظور مدیریت اجزا یا همان  کامپوننتها(Component) :
+                PackageManager pm=getPackageManager();
+                ComponentName cn=new ComponentName(Main.this,Broadcast_wifi.class);
+          
+ //عبارت DISABLED به منظور فعال کردن کامپوننت و عبارت DONT_KILL_APP به منظور از بین نرفتن اکتیویتی و تنها انجام فعالیت روی کامپوننت :     pm.setComponentEnabledSetting(cn,PackageManager.COMPONENT_ENABLED_STATE_DISABLED,PackageManager.DONT_KILL_APP);
+                Toast.makeText(getApplicationContext(), "DISABLED!", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+    }
+}

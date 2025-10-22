@@ -1,0 +1,56 @@
+﻿import java.io.IOException;
+
+import android.content.Context;
+import android.hardware.Camera;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+
+//این کلاس(با نام دلخواه campreview) نتیجه اش یک ویو است .
+//این کلاس باید یک سطح نمایشی(SurfaceView) باشد . در این حالت تنها یک فریم از نمای لنز دوربین تشکیل میشود پس برای ایجاد فریم های پیوسته و یک حالت زنده از لنز دوربین باید  این سطح نمایشی را تابع ما نگهدارد پس یک ایمپلیمنت از  SurfaceHolder لازم است و این نمای زنده را برای تابع فراهم کند(Callback کند) :
+public class campreview extends SurfaceView implements SurfaceHolder.Callback {
+
+//تعریف دو شئ لازم در برنامه :
+	private SurfaceHolder mHolder;
+	private Camera mCam;
+	
+//متد سازنده(برای مقداردهی متغیرها و اشیا) برای کلاس campreview :
+	public campreview(Context context,Camera cam) {
+		super(context);
+	
+		mCam=cam;
+		
+		mHolder=getHolder();
+		mHolder.addCallback(this);
+
+//این دستور در صورت کمبود فضا در رم دستگاه ، یک بافر کمکی برای نگهداری(Holder) استفاده میکند(این دستور برای اندروید ۳ به بالا لازم نیست) :	mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+		
+	}
+
+//سه متد زیر متدهای ضروری کلاس میباشند :
+	@Override
+	public void surfaceChanged(SurfaceHolder arg0, int arg1, int arg2, int arg3) {
+		// TODO Auto-generated method stub
+	
+	}
+	
+//با تشکیل سطح نمایشی(surfaceview) در لنز دوربین ، این سطح به شئ ما از دوربین اختصاص داده میشود :
+	@Override
+	public void surfaceCreated(SurfaceHolder arg0) {
+		// TODO Auto-generated method stub
+		try{
+			mCam.setPreviewDisplay(arg0);
+			mCam.startPreview();
+			
+		}catch(IOException e){
+	
+		}
+	}
+
+	@Override
+	public void surfaceDestroyed(SurfaceHolder arg0) {
+		// TODO Auto-generated method stub
+	
+	}
+
+
+}

@@ -1,0 +1,9 @@
+﻿public class temp {
+
+	
+// این کلاس سه متغیر زیر را به عنوان متغیر کمکی در خود دارد :
+	static int in;
+	static double out;
+	static boolean sw=false;
+	
+}

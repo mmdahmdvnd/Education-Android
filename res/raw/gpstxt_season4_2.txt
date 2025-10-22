@@ -1,0 +1,44 @@
+﻿import android.location.Location;
+import android.location.LocationListener;
+import android.os.Bundle;
+
+//برای استفاده از سنسور دستگاه ، میبایست اینترفیس مربوط به آنرا ایمپلیمنت کرد :
+//ایجاد کلاس با نام دلخواه gps و implement کردن اینترفیس LocationListener(یعنی کلاس gps متدهای LocationListener را اجرا میکند( پس خود یک LocationListener است)  مثلا متد ()getLatitude و ()getLongitude در زیر :
+public class gps implements LocationListener {
+
+//تعریف دو متغیر که عرض و طول جغرافیایی یک نقطه را در خود ذخیره میکنند . نوع double بخاطر عدد اعشاری بودن عرض و طول جغرافیایی هر نقطه است :
+	public static double lat;
+	public static double lon;
+
+//چهار متد زیر متدهای ضروری کلاسی هستند که از LocationListener ایمپلیمنت میشود :
+	@Override
+	public void onLocationChanged(Location loc) {
+		// TODO Auto-generated method stub
+
+
+//عرض و طول جغرافیایی یک نقطه در دو متغیر ریخته میشود :
+		lat=loc.getLatitude();
+		lon=loc.getLongitude();
+	
+	}
+
+
+	@Override
+	public void onProviderDisabled(String arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

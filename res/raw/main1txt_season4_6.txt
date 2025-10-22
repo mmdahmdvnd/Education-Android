@@ -1,0 +1,82 @@
+﻿import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import android.hardware.Camera;
+import android.hardware.Camera.PictureCallback;
+import android.os.Bundle;
+import android.os.Environment;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.Toast;
+
+public class Main extends Activity {
+
+//تعریف متغیرها و اشیا :
+	private Camera cam;
+	private campreview cp;
+	private Button btn;
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        btn=(Button) findViewById(R.id.btn);
+   FrameLayout fl=(FrameLayout) findViewById(R.id.fl1);
+
+//در همین متد ()onCreate دستور زیر دوربین را باز(آماده) میکند . (این دستور را هم میتوان در کلاس campreview قرار داد) :
+        try{
+        	cam=Camera.open();
+        }catch(Exception e){
+        }
+    
+//یک شئ جدید از کلاس campreview . کلمه this جایگزین کانتکست در تابع سازنده ی همان کلاس است .     
+    	cp=new campreview(this,cam);
+ 
+    	fl.addView(cp); 
+
+  //تا اینجا یک ویو در لنز دوربین داریم(که آنرا از کلاس campreview میگیریم) که فریمهای تصاویر مقابل دوربین را بشکل یک تصویر زنده ، در لنز نشان میدهد . حال با کلیک بر روی دکمه زیر ، یک فریم به عنوان تصویر ثبت میشود :
+    	btn.setOnClickListener(new OnClickListener() {	
+			@Override
+			public void onClick(View arg0) {	
+				cam.takePicture(null, null, mpic);
+				String path=Environment.getExternalStorageDirectory().getPath()+"/mypic/"+System.currentTimeMillis()+".jpg";
+				Toast.makeText(getApplicationContext(), path, Toast.LENGTH_LONG).show();			
+			}
+		});
+    	
+             
+    }
+
+//تابع کالبک(function callback) زمانی تعریف و استفاده  میشود که لازم باشد بعنوان آرگومان یک تابع دیگر بکار رود(که در اینجا بعنوان آرگومانی از ()takePicture که در بالا تعریف شد ، بکار رفته است) :
+    private PictureCallback mpic=new PictureCallback() {
+//متد ضروری برای این تابع :	
+		@Override
+		public void onPictureTaken(byte[] data, Camera camera) {
+
+//ابتدا یک پوشه در مسیر حافظه خارجی با نام mypic ایجاد و سپس یک فایل عکس با فرمت jpg(که فرمت پیشفرض است)	 و با نامی منحصر به فرد با استفاده از زمان سیستم در این مسیر ایجاد میشود و سپس data که بعنوان آرگومان گرفته شد در خروجی ، که همین فایل عکس میباشد ، رایت میشود :
+			File f1=new File(Environment.getExternalStorageDirectory().getPath()+"/mypic");
+			if(!f1.exists()){	
+				f1.mkdir();
+			}		
+			File f2=new File(Environment.getExternalStorageDirectory().getPath()+"/mypic/"+System.currentTimeMillis()+".jpg");
+			
+			try{		
+				FileOutputStream fos=new FileOutputStream(f2);
+				fos.write(data);
+				fos.close();
+
+			}catch(IOException e){			
+			}
+			
+			
+		}
+	};
+    
+    
+    
+}

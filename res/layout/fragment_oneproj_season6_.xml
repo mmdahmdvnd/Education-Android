@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent" 
+   android:orientation="vertical"
+   android:background="#4bf6b8">
+
+       <TextView
+           android:id="@+id/matn1_season4_4_"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_weight="1"
+           android:layout_marginTop="20dp"
+           android:layout_marginRight="10dp"
+           android:textColor="#f62c5c"
+           android:text="در این صفحه میتوان بجای این تکست ویوی ساده هر نوع فعالیتی که در اکتیویتی انجام میشود را در غالب این فرگمنت انجام داد ."
+           />
+
+</LinearLayout>

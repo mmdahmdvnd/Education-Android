@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+  
+    tools:context=".Main" 
+    android:background="@drawable/back2">
+
+    <TextView
+        android:id="@+id/last"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/status"
+        android:layout_marginTop="70dp"
+        android:textSize="17dp"
+        android:text="پخش صوت"
+        android:textColor="#d80408"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="41dp"
+        android:text="www.android-mtr-design.ir"
+         android:textColor="#e304fd"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="26dp"
+        android:layout_marginRight="10dp"
+        android:text="با کلیک بر روی آیکون  - صدا ضبط میشود و با کلیک بر روی نام صدای ضبط شده  - صدا پخش خواهد شد . فایل صوتی ضبط شده در پوشه myrec در حافظه دستگاه ذخیره میشود ."
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#e304fd" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="102dp"
+        android:text="   آماده ضبط   "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#d80408"
+        android:textSize="17dp" />
+
+    <ImageView
+        android:id="@+id/rec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:src="@drawable/rec" />
+
+</RelativeLayout>

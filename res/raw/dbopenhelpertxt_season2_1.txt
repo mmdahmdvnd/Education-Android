@@ -1,0 +1,47 @@
+﻿import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.sqlite.SQLiteOpenHelper;
+
+
+
+//یک کلاس با نام دلخواه(در اینجا dbopenhelper) ایجاد میکنیم و آنرا از SQLiteOpenHelper مشتق(extends) میکنیم :
+public class dbopenhelper extends SQLiteOpenHelper {
+
+//متغیرهای مورد نیاز در برنامه را ایجاد میکنیم :
+	public static final String dbname="dbtest";
+	public static final String tblname="tbluser";
+	
+	public static final String cid="id";
+	
+	public static final String cname="name";
+	public static final String cuser="user";
+	public static final String cpass="pass";
+	
+//کوئری زیر را برای ایجاد
+جدول(table) مینویسیم :
+	public static final String createtbl="CREATE TABLE "+tblname+"("+cid+" INTEGER PRIMARY KEY AUTOINCREMENT,"+cname+" TEXT,"+cuser+" TEXT,"+cpass+" TEXT);";
+
+	//سازنده ی کلاس :
+	public dbopenhelper(Context context) {
+		super(context, dbname, null, 1);	
+	}
+	
+	//متد ()onCreate
+با اجرای کلاس اجرا میشود و با آرگومان از نوع SQLiteDatabase , کوئری createtbl را اجرا و دیتابیس و جدول را در آن ایجاد میکند :
+	public void onCreate(SQLiteDatabase db) {
+		
+		db.execSQL(createtbl);
+		
+	}
+
+	//متد ()onUpgrade
+با حذف دیتابیس قدیمی(اگر وجود داشته باشد) و ایجاد دیتابیس از نو آنرا آپدیت میکند :
+	public void onUpgrade(SQLiteDatabase db, int arg1, int arg2) {
+		
+		db.execSQL("DROP TABLE IF EXIST"+tblname);
+		onCreate(db);
+		
+	}
+
+}

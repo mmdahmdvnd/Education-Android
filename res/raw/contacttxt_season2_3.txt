@@ -1,0 +1,119 @@
+﻿import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class contact extends Activity {
+
+//تعریف تکست ویو و دکمه های موجود در صفحه ی xml :
+	private TextView name;
+	private TextView family;
+	private TextView address;
+	private TextView email;
+	private TextView number;
+	
+	private Button update;
+	private Button delete;
+	
+	private Button call;
+	private Button sms;
+	
+	private dbHandler db;
+	private String id;
+	protected void onCreate(Bundle savedInstanceState) {
+		
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.contact);
+	
+	
+
+//در اینجا this به این منظور آمده که چون شئ db از نوع کلاس dbHandler میباشد و سازنده ی این کلاس یک آرگومان از نوع context دارد پس وقتی در کلاس contact فراخوانی میشود ، کلمه this یعنی context همین کلاس contact را به آن میدهیم(کاربرد کانتکست این است که هر زمان بخواهیم که سیستم کاری برای ما انجام دهد مثلا دیتا را از دیتابیس بخواند و یا در کار با سرویسها و ... و در کل هر کاری که مربوط به سیستم شود ، باید کانتکست را بکار ببریم) :
+		db=new dbHandler(this);
+
+// کلاس contact با فشردن هر سطر از لیست در کلاس Main باز میشود ، مقدار id که توسط Intent از کلاس Main فرستاده میشود ، در Bundle دریافت و نگهداری میشود :
+		Bundle extra=getIntent().getExtras();
+		id=extra.getString("id");
+		
+		name=(TextView) findViewById(R.id.contact_name1);
+		family=(TextView) findViewById(R.id.contact_family1);
+		address=(TextView) findViewById(R.id.contact_address1);
+		email=(TextView) findViewById(R.id.contact_email1);
+		number=(TextView) findViewById(R.id.contact_number1);
+		
+		update=(Button) findViewById(R.id.contact_update);
+		delete=(Button) findViewById(R.id.contact_delete);
+
+		
+		call=(Button) findViewById(R.id.contact_call);
+		sms=(Button) findViewById(R.id.contact_sms);
+		
+		db.open();
+//با باز شدن کلاس contact , اطلاعات مخاطب با آی دی برابر id ، در تکست ویوها چاپ میشوند :
+		name.setText(db.display2(Integer.parseInt(id), 1));
+		family.setText(db.display2(Integer.parseInt(id), 2));
+	address.setText(db.display2(Integer.parseInt(id), 3));
+		email.setText(db.display2(Integer.parseInt(id), 4));
+	number.setText(db.display2(Integer.parseInt(id), 5));
+		db.close();
+		
+	//دکمه ی update کلاس update را باز میکند و همان آی دی برابر id را به این کلاس میفرستد(چون قصد آپدیت کردن مخاطب با همین آی دی را داریم): 
+		update.setOnClickListener(new OnClickListener(){
+			public void onClick(View arg0) {
+	
+				Intent update=new Intent(contact.this,update.class);
+				update.putExtra("id", id+"");
+				startActivity(update);
+		
+			}
+	
+		});
+
+	//کلید delete مخاطب با آی دی برابر id را حذف میکند :	
+		delete.setOnClickListener(new OnClickListener(){	
+			public void onClick(View arg0) {
+			
+				db.open();
+				db.delete(Integer.parseInt(id));
+				db.close();
+				finish();
+			}
+		});
+	
+//این کد پنجره ی تماس را برای شماره ی مخاطب باز میکند :
+			call.setOnClickListener(new OnClickListener(){
+			public void onClick(View arg0) {
+			
+				startActivityForResult(new Intent("android.intent.action.CALL",Uri.parse("tel:"+number.getText().toString())), 1);
+		
+			}
+	
+		});
+//این کد پنجره ی پیام رسانی را برای مخاطب باز میکند :
+			sms.setOnClickListener(new OnClickListener(){
+				public void onClick(View arg0) {
+	
+					startActivity(new  Intent(Intent.ACTION_VIEW,Uri.parse("sms:"+number.getText().toString())));
+				}
+});
+		
+
+	}
+
+//متد ()onResume زمانیکه به اکتیویتی بازمیگردیم فراخوانی میشود و چون ممکن است مثلا با صفحه ی insert یا update مخاطبان تغییر کرده باشند ، این متد مخاطبان را از نو بارگذاری میکند :
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+		db.open();
+		name.setText(db.display2(Integer.parseInt(id), 1));
+		family.setText(db.display2(Integer.parseInt(id), 2));
+	address.setText(db.display2(Integer.parseInt(id), 3));
+		email.setText(db.display2(Integer.parseInt(id), 4));
+	number.setText(db.display2(Integer.parseInt(id), 5));
+		db.close();
+	}
+}

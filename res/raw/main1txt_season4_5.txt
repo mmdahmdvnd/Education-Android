@@ -1,0 +1,136 @@
+﻿import java.io.File;
+import java.io.IOException;
+
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class Main extends Activity {
+
+//تعریف متغیرهای مورد نیاز در برنامه :
+	private ImageView rec;
+	private TextView status;
+	private TextView last;
+
+   private String lpath="";
+	private String lname="";
+	
+	private boolean st=false;
+
+//تعریف مدیا رکوردر و مدیا پلیر(جهت ضبط و پخش صوت) :
+	private MediaRecorder mr;
+	private MediaPlayer mp;
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        rec=(ImageView) findViewById(R.id.rec);
+        status=(TextView) findViewById(R.id.status);
+        last=(TextView) findViewById(R.id.last);    
+   
+//طبق فصل "فایلینگ" یک فایل(پوشه) در حافظه دستگاه و با نام "myrec" ایجاد میشود :
+        File f=new File(Environment.getExternalStorageDirectory().getPath()+"/myrec");
+        if(!f.exists()){
+        	f.mkdir();
+        }
+    
+    
+        rec.setOnClickListener(new OnClickListener() {		
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+
+//با کلیک بر روی rec ،متغیر st طبق تعریف برابر false است پس آنرا(برای استفاده در پخش صدا)	برابر true میکنیم . سپس تابع ()record	 تعریف شده در زیر را فراخوانی کرده و سپس تصویر "ایمیج ویو" را تغییر داده و در "تکست ویو" متن ...playing را چاپ میکنیم . حال هر زمان که برای قطع ضبط صدا روی کلید مجدد کلیک کنیک ، ضبط متوقف میشود و دستورات else اجرا میشوند :
+				if(st==false){
+					
+					st=true;
+					record();
+					rec.setImageResource(R.drawable.stop);
+					status.setText("Playing ...");
+								
+				}else{			
+					st=false;
+					mr.stop();
+					mr.release();
+					mr = null;
+					rec.setImageResource(R.drawable.rec);
+					status.setText("Ready !");
+					last.setText(lname+"");
+				}					
+			}
+		});
+  
+//کلیک بر روی متن موجود در تکست ویوی last (که نام آخرین فایل ضبط شده در آن چاپ میشود) فایل ضبط شده را پخش میکند :         
+        last.setOnClickListener(new OnClickListener() {		
+			@Override
+			public void onClick(View arg0) {
+				
+				play();			
+			}
+		});
+    
+    
+    }
+
+//تابع ()record جهت ضبط کردن فایل صوتی - کدهای موجود جهت تنظیم شرایط مورد نیاز برای ضبط کردن فایل صوتی لازم هستند  :
+    private void record(){
+    	
+    	mr=new MediaRecorder();
+
+//تنظیم میکروفون(MIC) بعنوان منبع صوت :	mr.setAudioSource(MediaRecorder.AudioSource.MIC);
+
+//تنظیم فرمت فایل خروجی ضبط شده(در اینجا پیشفرض تنظیم شده) که میتوان طبق لیست باز شده در IDE آنرا تغییر داد :	mr.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
+
+//روش Encode(کد کردن - رمز گذاری) فایل صوتی :
+mr.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);	
+//مسیری که فایل در آن ذخیره میشود به همراه اسم فایل(که در اینجا از زمان سیستم برای متفاوت بودن نام هر فایلی که ضبط میشود از فایل دیگر ، استفاده شده است) و پسوند فایل صوتی :
+lpath=Environment.getExternalStorageDirectory().getPath()+"/
+myrec/"+System.currentTimeMillis()+".amr";
+
+//متغیر lname برای استفاده در کلیک کردن rec :
+    	lname=System.currentTimeMillis()+".amr";
+
+//تنظیم lpath بعنوان خروجی برای مدیا رکوردر :
+    	mr.setOutputFile(lpath);
+    	
+    	try{ 		
+    		mr.prepare();
+//این catch به این منظور است که ، اگر موارد منطقی که در بالا لازم بود ، موجود و یا صحیح نبود برنامه crash نکند :
+    	}catch(IllegalStateException e){		
+
+//این catch به این منظور است که ، اگر منبع ورودی موجود نبود(مثلا اگر دستگاه میکروفون نداشت) برنامه crash نکند(که اگر چنین حالتی رخ دهد ، فایلی ضبط نمیشود و برنامه به کار خود ادامه میدهد ولی crash نمیکند) :
+    	}catch(IOException e){ 		
+    	}
+    	mr.start();
+    }
+
+
+//تابع ساده زیر جهت پخش فایل صوتی که در مسیر lpath موجود است میباشد . دستور try-catch به این منظور است که اگر در مسیر lpath فایل مذکور موجود نبود(مثلا حذف شده بود) برنامه crash نکند و اجرای آن قطع نشود .
+    private void play(){
+	  mp=new MediaPlayer();
+	  
+	  try{
+		  mp.setDataSource(lpath);
+		  mp.prepare();
+		  mp.start(); 	  
+	  }catch(IOException e){	  
+	  }  
+    }
+    
+   
+  
+}

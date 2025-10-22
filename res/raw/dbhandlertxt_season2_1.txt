@@ -1,0 +1,84 @@
+﻿import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+
+
+//یک کلاس دلخواه(در اینجا dbHandler) ایجاد میکنیم  :
+(در این کلاس عملیات هایی که روی دیتابیس باید صورت گیرد نوشته میشود)
+public class dbHandler {
+
+//یک شئ از کلاس dbopenhelper و یک شئ از کلاس پایه ی SQLiteDatabase ایجاد میکنیم :
+	private dbopenhelper dbhelper;
+	private SQLiteDatabase database;
+	
+	//
+سازنده ی کلاس : سازنده ها بمنظور مقداردهی متغیرها در هر فراخوانی کلاس نوشته میشوند . یک شئ از کلاس dbopenhelper ایجاد میشود .
+	public dbHandler(Context context){
+		
+		dbhelper=new dbopenhelper(context);
+
+	}
+	
+	
+	public void open(){
+		database=dbhelper.getWritableDatabase();
+	}
+	
+	public void close(){
+		
+		dbhelper.close();
+	}
+
+	
+//با فراخوانی تابع Display با ورودیهای row و field ، یک کوئری و کرسر cu , مقدار ستون(field) مربوط به سطر(row) را از جدول در متغیر name ذخیره میکند .
+	public String Display(int row,int fild){
+		Cursor cu= database.query(dbhelper.tblname, null, null, null, null, null, null);
+		cu.moveToPosition(row);
+		String name=cu.getString(fild);
+		return name;
+	}
+	
+//تابع inser
+بوسیله ی ContentValues cv متغیرها در جدول را مقداردهی میکند (مقادیر ابتدا در cv(که بعنوان یک ظرف انتقال میباشد) قرار میگیرند و سپس بوسیله ی متد ()insert در متغیرهای جدول قرار میگیرند .)
+	public void inser(String name,String user,String pass){
+
+		ContentValues cv=new ContentValues();
+		cv.put(dbhelper.cname, name);
+		cv.put(dbhelper.cuser, user);
+		cv.put(dbhelper.cpass, pass);
+		database.insert(dbhelper.tblname, dbhelper.cname, cv);
+	
+	}
+
+	
+//تعداد سطرهای جدول را بر میگرداند :
+	public Integer count(){
+		Cursor cu= database.query(dbhelper.tblname, null, null, null, null, null, null);
+		int s=cu.getCount();
+		return s;
+	}
+	
+
+
+//آبدیت کردن مقادیر field به مقادیر value :
+
+(متد update نیز شبیه متد inser عمل میکند )
+	public void update(String value,int fild,int id){
+		ContentValues cv=new ContentValues();
+		
+		if(fild==1){
+		cv.put(dbhelper.cname, value);
+		}else if(fild==2){
+		cv.put(dbhelper.cuser, value);
+		}else if(fild==3){
+		cv.put(dbhelper.cpass, value);
+		}
+
+		database.update(dbhelper.tblname, cv, "id="+id, null);
+		
+		
+	}
+	
+}

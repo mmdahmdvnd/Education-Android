@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+  <Button
+        android:id="@+id/button1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Fragment No.1"
+        android:onClick="selectFrag" />
+
+     <Button
+         android:id="@+id/button2"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:onClick="selectFrag"
+         android:text="Fragment No.2" /> 
+
+//فرگمنت پیشفرض که در اولین اجرای برنامه در صفحه ی activity_main ظاهر میشود همان FragmentOne با آی دی fragment_place میباشد(که میتوان سایر فرگمنتها را بعنوان پیشفرض قرار داد) :
+   <fragment
+ android:name="com.javacodegeeks.android.fragmentstest.FragmentOne"
+        android:id="@+id/fragment_place"
+   		android:layout_width="match_parent"
+   		android:layout_height="match_parent" />
+    
+</LinearLayout>

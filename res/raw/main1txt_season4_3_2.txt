@@ -1,0 +1,70 @@
+﻿//سنسور شتاب سنج سنسوریست که با کج شدن دستگاه از حالت مسطح ، به چپ یا راست(برای محور x) ، به جلو یا عقب(برای محور y) و در حالت عمود بودن دستگاه(برای محور z) ، مقدار برگشتی از سنسور را نشان میدهد :
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
+import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+//اینتر فیس SensorEventListener ایمپلیمنت شده تا برنامه متد های این اینترفیس را که لازم دارد اجرا کند(برای استفاده از سنسور میبایست اینترفیس مربوط به آن را توسط کلاس ایمپلیمنت کرد) :
+public class Main extends Activity implements SensorEventListener {
+
+	private TextView txt;
+
+//تعریف یک سنسور منجر و یک سنسور :
+	private SensorManager sm;
+	private Sensor AccM;
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        txt=(TextView) findViewById(R.id.txt);
+        
+ //تعریف سنسور منجر بمنظور دریافت سنسور سرویس از دستگاه . بکار بردن کانتکست در اینجا به این علت است که چون یک پروسه توسط سیستم انجام میشود(SENSOR_SERVICE) پس باید از کانتکست استفاده شود تا این پروسه انجام شود :  
+        sm=(SensorManager) getSystemService(Context.SENSOR_SERVICE);
+       
+//توسط سنسور منجر ، سنسور شتاب سنج را دریافت میکنیم : AccM=sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);     
+    }
+
+//اولین متد ضروری برای ایمپلیمنتی که در ابتدای کلاس از سنسورها انجام شد(این متد زمانی فراخوانی میشود که دقت سنسور تغییر کند) :
+	@Override
+	public void onAccuracyChanged(Sensor arg0, int arg1) {
+		// TODO Auto-generated method stub	
+	}
+
+//دومین متد ضروری کلاس(این متد زمانی فراخوانی میشود که سنسور تغییر کند یعنی زمانیکه مقداری که بعنوان خروجی برمیگرداند تغییر کند) :
+//عدد صفر[0] ، [1] و [2] کدهاییست که به عنوان کد پیشفرض برای این سنسور تعیین شده و ثابت است . i و j و k هر کدام مقدار برگشتی از سنسور را بعنوان شتاب در جهت محور x یا y یا z نشان میدهند :
+	@Override
+	public void onSensorChanged(SensorEvent s) {
+		
+		float i=s.values[0];
+		float j=s.values[1];
+		float k=s.values[2];
+			
+				txt.setText("i:"+i+"\n"+"j:"+j+"\n"+"k"+k);
+		
+	}
+
+
+//در زمان استفاده از یک سنسور از دستگاه ، تنها همان سنسور موجود است و استفاده از سنسور دستگاه بلوکه میشود و تنها به این سنسور کنونی تعلق میگیرد . پس دو متد زیر
+به منظور ثبت(register) کردن سنسور بعنوان سنسور کنونی میبایست تنظیم شوند(عبارت SENSOR_DELAY_NORMAL) به معنی این است که سیستم سنسور بصورت مدت زمان معمولی در اختیار این سنسور کنونی قرار میگیرد(سایر عبارتها را هم میتوان با فشردن کلیدهای Ctrl+Space از IDE مورد استفاده ی خود ، جایگزین کرد))  :
+@Override
+	protected void onResume() {
+		super.onResume();	
+		sm.registerListener(this, AccM, SensorManager.SENSOR_DELAY_NORMAL);	
+	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		sm.unregisterListener(this);
+	}
+ 
+}

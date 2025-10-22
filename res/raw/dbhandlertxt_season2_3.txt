@@ -1,0 +1,86 @@
+﻿import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+//طبق قسمت اول از همین فصل ، کلاس dbHandler را ایجاد میکنیم :
+public class dbHandler {
+
+	private dbopenhelper dbhelper;
+	private SQLiteDatabase database;
+	
+	
+	public dbHandler(Context context){
+		
+		dbhelper=new dbopenhelper(context);
+
+	}
+	
+	
+	public void open(){
+		database=dbhelper.getWritableDatabase();
+	}
+	
+	public void close(){
+		
+		dbhelper.close();
+	}
+	
+	public String Display(int row,int fild){
+		Cursor cu= database.query(dbhelper.tblname, null, null, null, null, null, null);
+		cu.moveToPosition(row);
+		String name=cu.getString(fild);
+		return name;
+	}
+	
+	
+	public String display2(int id,int fild){
+		
+		Cursor cu= database.rawQuery("select * from phonebook where id="+id, null);
+		cu.moveToFirst();
+		String name=cu.getString(fild);
+		return name;
+	}
+	
+	public void insert(String name,String family,String address,String email,String number){
+		
+		ContentValues cv=new ContentValues();
+		cv.put(dbhelper.cname, name);
+		cv.put(dbhelper.cfamily, family);
+		cv.put(dbhelper.caddress, address);
+		cv.put(dbhelper.cemail, email);
+		cv.put(dbhelper.cnumber, number);
+		database.insert(dbhelper.tblname, dbhelper.cname, cv);
+	
+		
+	}
+	
+	public Integer count(){
+		Cursor cu= database.query(dbhelper.tblname, null, null, null, null, null, null);
+		int s=cu.getCount();
+		return s;
+	}
+	
+	public void delete(int id){
+		
+		database.delete(dbhelper.tblname, "id="+id, null);
+	}
+	
+	
+	
+	public void update(String name,String family,String address,String email,String number,int id){
+		ContentValues cv=new ContentValues();
+		
+		cv.put(dbopenhelper.cname, name);
+		cv.put(dbopenhelper.cfamily, family);
+		cv.put(dbopenhelper.caddress, address);
+		cv.put(dbopenhelper.cemail, email);
+		cv.put(dbopenhelper.cnumber, number);
+		
+		
+		database.update(dbhelper.tblname, cv, "id="+id, null);
+		
+		
+	}
+	
+}

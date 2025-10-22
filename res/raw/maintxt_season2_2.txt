@@ -1,0 +1,56 @@
+﻿در اندروید دو نوع دیتابیس میتوان تعریف و استفاده کرد . دیتابیس داخلی که در زمان اجرای برنامه ، خود برنامه آنرا در حافظه ی داخلی دستگاه ایجاد میکند و دیگری دیتابیس خارجی است که توسط برنامه نویس بوسیله نرم افزارهایی مثل SQLiteExpert و ... ساخته میشود و در برنامه(معمولا پوشه ی asset) قرار داده میشود .
+
+در این آموزش دیتابیس خارجی توضیح داده شده است .
+
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class Main extends Activity {
+
+//یک متغیر یا شئ از کلاس databse با نام db :
+	private databse db;
+
+	private Button btn;
+	private TextView txt1;
+	
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+
+//به شئ ایجاد شده از کلاس databse فضا اختصاص داده میشود (this در اینجا بخاطر این است که چون سازنده ی کلاس databse آرگومان context دارد پس برای فراخوانی این کلاس باید یک کانتکست به عنوان آرگومان در فراخانی تعیین شود و چون در کلاس Main هستیم ، کانتکست همین کلاس را به آن میدهیم) :
+		db=new databse(this);
+
+//فراخوانیهایی از متدهای کلاس databse :	
+		db.database();
+		
+		db.open();
+		
+		txt1=(TextView) findViewById(R.id.txt1);
+		btn=(Button) findViewById(R.id.btn1);
+	
+		
+		btn.setOnClickListener(new OnClickListener(){
+		
+			public void onClick(View arg0) {
+		
+//مقدار متناظر در سطر دوم و ستون دوم
+دیتابیس را در تکست ویوی txt1 چاپ میکند :
+				txt1.setText(db.Display(1, 1));
+			
+			}
+		
+		
+		});
+	
+
+
+	}
+
+
+}

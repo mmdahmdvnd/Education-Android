@@ -1,0 +1,108 @@
+﻿import java.io.IOException;
+import java.io.InputStream;
+import android.app.Activity;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.LinearLayout.LayoutParams;
+
+public class Main extends Activity {
+
+	private LinearLayout ll;
+	private int w,h;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+	
+//خاصیت DisplayMetrics به جهت نمایش و تعیین استاندارد ابعاد بکار رفته است که در اینجا تعیین ابعاد به پیکسل است :	
+		DisplayMetrics displaymetrics = new DisplayMetrics();
+	getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+		h = displaymetrics.heightPixels;
+		w = displaymetrics.widthPixels;
+		
+//اتصال "لاینر لیوت" به لایه ی(layout) خود
+:
+		ll=(LinearLayout) findViewById(R.id.myll);
+
+//متن که نمایش داده میشود و تصاویر بین متن :
+		String text=
+		"متن نمایشی :"
+    +"این اولین متن نمایشی است ."
+    +"<img1.png>"
+	 + "در بین دو بلوک از متن میتوان تصویر قرار داد ."
+	 + "<img2.png>"
+    + "این متن دوم بعد از تصویر است ."
+	 + "<img3.png>"
+				+ ""
+				+ ""
+				+ ""
+				+ "";
+
+//الگوریتم زیر متن و تصاویر بین متن را نمایش میدهد . به اینصورت که : به محض رسیدن به کاراکتر '>' ، متن از ابتدا تا قبل از تصویر ، با فراخوانی تابع ()ctext نمایش داده میشود(ابزار (x,y)substring متن از x تا y را از متن اصلی جدا میکند) . سپس به محض رسیدن به '<' تابع ()cimg فراخوانی و تصویر با نام موجود بین <> نمایش داده میشود :
+		int c1=0,c2=0,c3=0;
+		for(int i=0;i<text.length();i++){
+			if(text.charAt(i)=='<'){
+				c2=i;
+				if(!text.substring(c1,c2).equals("")){
+					ctext(text.substring(c1,c2));
+				}
+			}
+			if(text.charAt(i)=='>'){
+				c3=i;
+				cimg(text.substring(c2+1,c3));
+				c1=i+1;
+			}
+		}
+		
+
+	}
+
+
+//چون تکست ویو را درون تابع	بکار میبریم پس یک شئ از آن میسازیم و با آرگومان Main.this چه آنکه درون Main بکار میرود و از آنجا فراخوانی میشود . برای تعیین ابعاد مورد نیازمان جهت متن و تصویر ،  از LinearLayout.LayoutParams استفاده میکنیم . مارجین و پدینگ به ترتیب برای تعیین فاصله بیرونی و درونی از حاشیه بکار میرود . و در نهایت ویویی که ساخته شد را به ll اضافه میکنیم :
+	private void ctext(String text){
+		TextView tv=new TextView(Main.this);
+		LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+		lp.setMargins(0, 10, 0, 10);
+		tv.setPadding(10, 10, 10, 10);
+		lp.gravity=Gravity.CENTER;
+		tv.setText(text);
+		ll.addView(tv,lp);
+	}
+	
+
+	private void cimg(String name){
+		
+		ImageView img=new ImageView(Main.this);
+		double ch=w/2;
+		LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(w,(int)ch);
+		lp.gravity=Gravity.CENTER;
+
+//با AssetManager به پوشه ی Assets 
+دسترسی داریم : 
+		AssetManager am=getAssets();
+		InputStream is=null;
+		try {
+			is=am.open("image/"+name);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+//ورودی is که یک تصویر است را decode کرده و بوسیله BitmapFactory از آن Bitmap میسازیم و در img بعنوان تصویر تنظیم میکنیم و در نهایت ویویی که ساخته شد را به ll اضافه میکنیم :
+ 
+		Bitmap bi=BitmapFactory.decodeStream(is);	
+		if(bi!=null){
+			img.setImageBitmap(bi);
+			ll.addView(img, lp);
+		}
+	}
+	
+
+
+}

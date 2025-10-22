@@ -1,0 +1,304 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:id="@+id/scrollView1"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@drawable/back3">
+
+
+<RelativeLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+     >
+    
+
+     <TextView
+        android:id="@+id/textView1_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="55dp"
+        android:text="فصل چهارم :  سخت افزار" 
+        android:textSize="21dp"   
+        android:textColor="#fc0473"  />
+    
+    <TextView
+        android:id="@+id/textView2_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1_season4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="قسمت اول : بلوتوث و وای فای"
+        android:textSize="19dp"
+        android:textColor="#f57f17" />
+    
+    <ImageView
+        android:id="@+id/imageView1_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView2_season4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ejra_projeh" />
+
+    <ImageView
+        android:id="@+id/imageView2_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView1_season4"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/source" />
+    
+    
+    <TextView
+        android:id="@+id/textView3_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView2_season4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+         android:text="قسمت دوم : جی پی اس"
+         android:textSize="19dp"
+        android:textColor="#f57f17"/>
+    
+    <ImageView
+        android:id="@+id/imageView3_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView3_season4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ejra_projeh" />
+
+    <ImageView
+        android:id="@+id/imageView4_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView3_season4"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/source" />
+    
+    <TextView
+        android:id="@+id/textView4_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView4_season4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="قسمت سوم : سنسورها"
+        android:textSize="19dp"
+        android:textColor="#f57f17" />
+
+
+ <TextView
+        android:id="@+id/textView4_1_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4_season4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="بخش اول : سنسور مجاورت نور"
+        android:textSize="17dp"
+       
+        android:textColor="#8af319" />
+    
+    <ImageView
+        android:id="@+id/imageView5_1_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView4_1_season4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ejra_projeh" />
+
+    <ImageView
+        android:id="@+id/imageView5_2_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView5_1_season4"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/source" />
+    
+    <TextView
+        android:id="@+id/textView4_2_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView5_2_season4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="بخش دوم : سنسور شتاب سنج"
+        android:textSize="17dp"
+       
+        android:textColor="#8af319" />
+
+    <ImageView
+        android:id="@+id/imageView5_3_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView4_2_season4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ejra_projeh" />
+
+    <ImageView
+        android:id="@+id/imageView5_4_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView5_3_season4"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/source" />
+    
+        <TextView
+        android:id="@+id/textView4_3_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView5_4_season4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="بخش سوم : طراحی بازی ساده "
+        android:textSize="17dp"
+      
+        android:textColor="#8af319" />
+
+    <ImageView
+        android:id="@+id/imageView5_5_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView4_3_season4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ejra_projeh" />
+
+    <ImageView
+        android:id="@+id/imageView5_6_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView5_5_season4"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/source" />
+    
+    
+    
+    
+    
+    
+ <TextView
+        android:id="@+id/textView5_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView5_5_season4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="قسمت چهارم : نور صفحه نمایش"
+        android:textSize="19dp"
+        android:textColor="#f57f17" />
+    
+    <ImageView
+        android:id="@+id/imageView7_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView5_season4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ejra_projeh" />
+
+    <ImageView
+        android:id="@+id/imageView8_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView7_season4"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/source" />
+    
+     <TextView
+        android:id="@+id/textView6_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView8_season4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="قسمت پنجم:میکروفون دستگاه-طراحی ضبط صوت"
+        android:textSize="19dp"
+        android:textColor="#f57f17" />
+    
+    <ImageView
+        android:id="@+id/imageView9_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView6_season4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ejra_projeh" />
+
+    <ImageView
+        android:id="@+id/imageView10_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView9_season4"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/source" />
+
+    
+    
+    
+    
+    
+ <TextView
+        android:id="@+id/textView7_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView10_season4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="قسمت ششم : دوربین دستگاه"
+        android:textSize="19dp"
+        android:textColor="#f57f17" />
+    
+    <ImageView
+        android:id="@+id/imageView11_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView7_season4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ejra_projeh" />
+
+    <ImageView
+        android:id="@+id/imageView12_season4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView11_season4"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/source" />
+
+    <ImageView
+        android:id="@+id/imageView_line4"
+        android:layout_width="match_parent"      
+        android:layout_below="@+id/imageView12_season4"
+        android:layout_centerHorizontal="true"
+        android:layout_height="3dp" 
+        android:background="#000000"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="15dp"/>
+</RelativeLayout>
+
+</ScrollView>

@@ -1,0 +1,54 @@
+﻿import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+
+public class Main extends Activity {
+
+//تعریف seekbar جهت تنظیم روشنایی صفحه :
+	private SeekBar seek;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        seek=(SeekBar)findViewById(R.id.seekBar1);
+     
+        seek.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+
+//سه متد ضروری برای ()OnSeekBarChangeListener در زیر آمده اند . متد اول زمانیکه اهرم سیکبار(SeekBar) توسط کاربر لمس شود و متد دوم زمانیکه لمس اهرم پایان یابد فراخوانی میشوند(که بستگی به نیاز میتوان کدهایی را در آنها قرار داد) . متد سوم که مورد نیاز این پروژه است ، زمانیکه اهرم تغییر حرکت دهد فراخوانی میشود :
+			@Override
+			public void onStopTrackingTouch(SeekBar arg0) {
+				// TODO Auto-generated method stub	
+			}	
+
+			@Override
+			public void onStartTrackingTouch(SeekBar arg0) {
+				// TODO Auto-generated method stub		
+			}	
+
+			@Override
+			public void onProgressChanged(SeekBar arg0, int p, boolean arg2) {
+				// TODO Auto-generated method stub
+
+//یک WindowManager و LayoutParams مربوط به آن
+تعریف میکنیم که با متدهای ()getWindow و ()getAttributes پنجره و ویژگیهای آنرا دریافت کند :			
+	        WindowManager.LayoutParams lp=getWindow().getAttributes();
+
+//یکی از ویژگیهای پنجره(صفحه) نمایش ، نور صفحه است که آنرا طبق زیر تنظیم میکنیم . مقدار p/100f به این دلیل است که : f بخاطر float بودن مقدار روشنایی است . در لایه(layout) پروژه خاصیت max در سیکبار را برابر 100 قرار داده ایم و چون مقداری که screenBrightness میگیرد مقداری بین 0 و1 است پس برای تبدیل و مطابقت ایندو ، مقدار p(که یکی از آرگومانهای متد ()onProgressChanged در بالا است) را بر 100 تقسیم میکنیم :
+  lp.screenBrightness=p/100f;
+//ست(set) کردن تنظیمات :
+	getWindow().setAttributes(lp);			
+			}
+		});
+        
+        
+    
+    } 
+}

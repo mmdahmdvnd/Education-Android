@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent" 
+   android:orientation="vertical"
+   android:background="#4bf6b8">
+
+   
+
+       <TextView
+           android:id="@+id/matn2_season4_4_"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_weight="1"
+           android:layout_marginRight="10dp"
+           android:layout_marginTop="110dp"
+           android:textColor="#f62c5c"
+           android:text="میتوان صفحات فرگمنت بیشتری به تیتر بالا اضافه کرد ."
+           />
+
+       <ImageView
+           android:id="@+id/imageView1"
+           android:layout_width="120dp"
+           android:layout_height="120dp"
+           android:layout_weight="1"
+           android:layout_gravity="center"
+           android:layout_marginBottom="100dp"
+           android:src="@drawable/fr" />
+
+</LinearLayout>

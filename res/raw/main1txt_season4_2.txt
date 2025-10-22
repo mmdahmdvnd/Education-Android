@@ -1,0 +1,57 @@
+﻿import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class Main extends Activity {
+
+	private Button get;
+	private TextView txt;
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        get=(Button) findViewById(R.id.getloc);
+        txt=(TextView) findViewById(R.id.txt);    
+  
+        get.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+
+//فراخوانی متد ()gps که در زیر تعریف شده است :
+				gps();		
+			}
+		});
+ 
+ 
+    }
+    
+    
+    
+    private void gps(){
+ //تعریف یک لوکیشن منیجر : 	
+    	LocationManager lm=null;
+
+//تعریف یک لوکیشن لیستنر که یک شئ از کلاس gps میباشد(کلاس gps از لوکیشن لیستنر ، ایمپلیمنت شده ، پس به عنوان یک لوکیشن لیستنر ، از آن شئ ایی که لازم داریم را میسازیم) :
+    	LocationListener ll=new gps();
+ 
+//توسط لوکیشن منیجر ، سرویس لوکیشن را دریافت میکنیم :	
+    	lm=(LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+//متد جهت آپدیت کردن تغییرات ، مثلا حرکت نقطه و جابحایی آن :	lm.requestLocationUpdates(LocationManager.GP S_PROVIDER, 0, 0, ll);
+    	
+    	txt.setText(gps.lat+"\n"+gps.lon); 	
+    }
+    
+    
+ 
+}

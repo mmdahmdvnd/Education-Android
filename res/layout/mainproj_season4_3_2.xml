@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".Main"
+    android:background="@drawable/back2" >
+
+    <TextView
+        android:id="@+id/txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="82dp"
+        android:text="0"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#f80a0e" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="48dp"
+        android:layout_marginRight="10dp"
+        android:text="شتاب دستگاه در جهت سه محور مختصات Z , Y , X  در زیر نمایش داده میشود . با تغییر زاویه ی  دستگاه در این سه جهت اعداد بین  منفی 10 تا مثبت 10 تغییر میکنند "
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#b518e9" />
+
+</RelativeLayout>

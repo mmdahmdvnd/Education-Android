@@ -1,0 +1,23 @@
+﻿import android.app.Fragment;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+//کلاسFragmentTwo را از Fragment مشتق میکنیم :
+public class FragmentTwo extends Fragment{
+
+//متد ()onCreateView که از نوع View است متد ضروری برای کلاس مشتق شده از فرگمنت میباشد :
+   @Override
+   public View onCreateView(LayoutInflater inflater,
+      ViewGroup container, Bundle savedInstanceState) {
+     
+   
+ //لایه ی xml مربوط به FragmentTwo یعنی fragment_two را برای این اکتیویتی inflate میکند : 
+    View view = inflater.inflate(
+    		  R.layout.fragment_two, container, false);
+
+      return view;
+   }
+}

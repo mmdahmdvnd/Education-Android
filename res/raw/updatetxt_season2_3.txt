@@ -1,0 +1,82 @@
+﻿import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class update extends Activity{
+
+//تعریف ادیت تکست و دکمه های موجود در صفحه ی xml :
+	private EditText name;
+	private EditText family;
+	private EditText address;
+	private EditText email;
+	private EditText number;
+	
+	private Button update;
+	private Button cancel;
+	
+	private String id;
+	private dbHandler db;
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.update);
+
+//در اینجا this به این منظور آمده که چون شئ db از نوع کلاس dbHandler میباشد و سازنده ی این کلاس یک آرگومان از نوع context دارد پس وقتی در کلاس update فراخوانی میشود ، کلمه this یعنی context همین کلاس update را به آن میدهیم (کاربرد کانتکست این است که هر زمان بخواهیم که سیستم کاری برای ما انجام دهد مثلا دیتا را از دیتابیس بخواند و یا در کار با سرویسها و ... و در کل هر کاری که مربوط به سیستم شود ، باید کانتکست را بکار ببریم):
+		db=new dbHandler(this);
+
+// کلاس update با فشردن دکمه update در کلاس contact باز میشود ، مقدار id که توسط Intent از کلاس contact فرستاده میشود ، در Bundle دریافت و نگهداری میشود :
+		Bundle extra=getIntent().getExtras();
+		id=extra.getString("id");		
+		
+		name=(EditText) findViewById(R.id.update_name);
+		family=(EditText) findViewById(R.id.update_family);
+		address=(EditText) findViewById(R.id.update_address);
+		email=(EditText) findViewById(R.id.update_email);
+		number=(EditText) findViewById(R.id.update_number);
+		
+		update=(Button) findViewById(R.id.update_update);
+		cancel=(Button) findViewById(R.id.update_cancel);
+	//با باز شدن کلاس update اطلاعات مخاطبی که آپدیت خواهد شد ، در ادیت تکستها جهت ادیت شدن قرار میگیرد :	
+		db.open();
+		name.setText(db.display2(Integer.parseInt(id), 1));
+		family.setText(db.display2(Integer.parseInt(id), 2));
+		address.setText(db.display2(Integer.parseInt(id), 3));
+		email.setText(db.display2(Integer.parseInt(id), 4));
+		number.setText(db.display2(Integer.parseInt(id), 5));
+		db.close();
+		
+	//کلید آپدیت بوسیله ی شئ db و متد update از کلاس dbHandler مقادیری که در ادیت تکستها وارد میشود را جایگزین مقادیر قبلی آنها در جدول بانک اطلاعاتی میکند :	
+		update.setOnClickListener(new OnClickListener(){		
+			public void onClick(View arg0) {
+				
+				db.open();
+				db.update(name.getText().toString(), family.getText().toString(), address.getText().toString(), email.getText().toString(), number.getText().toString(),Integer.parseInt(id));
+				db.close();
+				Toast.makeText(getApplicationContext(), "به روز رسانی با موفقیت انجام شد", Toast.LENGTH_LONG).show();
+				finish();
+			
+			}
+		
+		
+		});
+		
+cancel.setOnClickListener(new OnClickListener(){
+
+			public void onClick(View arg0) {
+				
+				finish();
+		
+			}
+		
+		});
+	
+
+	
+	
+	}
+	
+}
